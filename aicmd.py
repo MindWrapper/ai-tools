@@ -3,20 +3,24 @@ import argparse
 from dotenv import load_dotenv
 import os
 
-# Function to call OpenAI API
+
+def get_completion(prompt, model):
+    messages = [{"role": "user", "content": prompt}]
+    response = openai.ChatCompletion.create(
+        model=model,
+        messages=messages,
+        temperature=0, 
+    )
+    return response.choices[0].message["content"]
+
+
 def query_openai(prompt):
-    # Add your API key here
     home_dir = os.path.expanduser("~")
     dotenv_path = os.path.join(home_dir, ".secrets", "aicmd", ".env")
     load_dotenv(dotenv_path)
     openai.api_key = os.environ.get('OPEN_AI_KEY')
+    return get_completion(prompt, model="gpt-3.5-turbo")
 
-    response = openai.Completion.create(
-      engine="davinci",
-      prompt=prompt,
-      max_tokens=100
-    )
-    return response.choices[0].text.strip()
 
 # Main function for the CLI
 def main():
@@ -24,10 +28,16 @@ def main():
     parser.add_argument('command', help='Command to process')
     args = parser.parse_args()
 
+    home_dir = os.path.expanduser("~")
+    dotenv_path = os.path.join(home_dir, ".secrets", "aicmd", ".env")
+    load_dotenv(dotenv_path)
+
+    openai.api_key = os.environ.get('OPEN_AI_KEY')
     ai_command = args.command
     if ai_command.startswith("ai: "):
-        ai_command = ai_command.replace("ai: ", "")
-        result = query_openai(ai_command)
+        ai_command = ai_command.replace("ai: ", "print command that ")
+        ai_command += " use single line to I can copy & paste"
+        result = get_completion(ai_command, model="gpt-3.5-turbo")
         print(result)
     else:
         print("Command must start with 'ai: '")
