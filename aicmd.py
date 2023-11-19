@@ -25,13 +25,11 @@ def main():
 
     openai.api_key = os.environ.get('OPEN_AI_KEY')
     ai_command = args.command
-    if ai_command.startswith("ai: "):
-        ai_command = ai_command.replace("ai: ", "print command that ")
-        ai_command += " use single line to I can copy & paste. include hidden files into the search"
-        result = get_completion(ai_command, model="gpt-4")
-        print(result)
-    else:
-        print("Command must start with 'ai: '")
+    ai_command = args.command
+    prompt = f"print command that '{ai_command}' use single line so I can copy & paste. Include hidden files into the search"
+    result = get_completion(prompt, model="gpt-4")
+    print(result)
+
 
 if __name__ == "__main__":
     main()
