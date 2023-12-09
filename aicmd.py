@@ -2,6 +2,7 @@ import openai
 import argparse
 from dotenv import load_dotenv
 import os
+import json
 
 
 def get_completion(prompt, model):
@@ -35,7 +36,15 @@ def main():
     """
 
     result = get_completion(prompt, model="gpt-4")
-    print(result["command"])
+   
+    response_object = json.loads(result)
+
+    command_value = response_object.get('command', None)
+
+    if command_value is not None:
+        print(command_value)
+    else:
+        print("Can not generate command. Try another promt.")
 
 if __name__ == "__main__":
     main()
