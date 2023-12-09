@@ -25,11 +25,17 @@ def main():
 
     openai.api_key = os.environ.get('OPEN_AI_KEY')
     ai_command = args.command
-    ai_command = args.command
-    prompt = f"print command that '{ai_command}' use single line so I can copy & paste. Include hidden files into the search"
-    result = get_completion(prompt, model="gpt-4")
-    print(result)
 
+    prompt = f"""
+    print command that does '{ai_command}'.
+    If user asks to search or find something, then make sure to include hidden files.
+    If user doesn't specify the scope of search command, then use current directory.
+    Output should contain command only, I can paster into terminal. No comments or anything else.
+    Output should be in json object that contains command in 'command' key.
+    """
+
+    result = get_completion(prompt, model="gpt-4")
+    print(result["command"])
 
 if __name__ == "__main__":
     main()
