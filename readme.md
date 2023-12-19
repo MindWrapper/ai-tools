@@ -1,20 +1,52 @@
 # Various tiny ai-powered terminal helpers
 
+
+## Prerequisites
+Before you begin, ensure you have the following installed on your machine:
+
+Python 3.x
+
+- pip (Python package installer)
+- virtualenv
+
 Setup:
 
-```code
+```bash
 git clone git@github.com:MindWrapper/ai-tools.git ~/ai-tools
-echo "ai() { python ~/ai-tools/aicmd.py; }" >> ~/.zprofile  # Use ~/.bashrc or ~/.bash_profile for bash
+
+cd  ~/ai-tools 
+
+python3 -m venv venv
+
+source venv/bin/activate
+
+pip install -r requirements.txt
+
+```
+#echo "ai() { python  ~/ai-tools/aicmd.py; }" >> ~/.zprofile  # Or
+
+add `ai` function to `~/.zprofile` (or ~/.bashrc or ~/.bash_profile )
+
+```bash
+ai() {
+    ~/ai-tools/venv/bin/python ~/ai-tools/aicmd.py "$@"
+}
+deactivate
+
 mkdir -p ~/.secrets/aicmd && touch ~/.secrets/aicmd/.env
-# obtain api key from https://platform.openai.com/api-keys
+```
+
+Obtain api key from https://platform.openai.com/api-keys
+
+```bash
 echo "OPEN_AI_KEY=your_key" >>  ~/.secrets/aicmd/.env
-source ~/.zprofile  # Or source your bash profile file
+source ~/.zprofile 
 ```
 
 # Usage
 
 Example command:
-`ai "count occurrences of word 'ai' in all files"`
+`grep -ri "AI Command Line Assistant" . | wc -l`
 
 Output:
 
