@@ -4,7 +4,6 @@ from dotenv import load_dotenv
 import os
 import json
 
-
 def get_completion(prompt, model):
     messages = [{"role": "user", "content": prompt}]
     response = openai.ChatCompletion.create(
@@ -13,7 +12,6 @@ def get_completion(prompt, model):
         temperature=0, 
     )
     return response.choices[0].message["content"]
-
 
 def main():
     parser = argparse.ArgumentParser(description='AI Command Line Assistant')
@@ -28,21 +26,18 @@ def main():
     ai_command = args.command
 
     prompt = f"""
-    print command that does '{ai_command}'.
-    If user asks to search or find something, then make sure to include hidden files.
+    print command that '{ai_command}'.
+    If user asks to search or find something, then make sure to include hidden files,  unless user specifies otherwise.
     If user doesn't specify the scope of search command, then use current directory.
-    Output should contain command only, I can paster into terminal. No comments or anything else.
-    Output should be in json object that contains command in 'command' key.
+    If user asks for git command make sure to do include only git command.
+    When user asks to look for a pattern inside files, make sure pattern match is case-insensetive, unless user specifies otherwise.
+    Output should be a single line and signle command, no quotes, no new lines.
     """
 
     result = get_completion(prompt, model="gpt-4")
    
-    response_object = json.loads(result)
-
-    command_value = response_object.get('command', None)
-
-    if command_value is not None:
-        print(command_value)
+    if result is not None:
+        print(result)
     else:
         print("Can not generate command. Try another promt.")
 
