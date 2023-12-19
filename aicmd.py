@@ -1,17 +1,23 @@
-import openai
 import argparse
 from dotenv import load_dotenv
+from openai import OpenAI
 import os
-import json
 
 def get_completion(prompt, model):
+
+    client = OpenAI(
+        # This is the default and can be omitted
+        api_key=os.environ.get("OPEN_AI_KEY")
+    )
+
     messages = [{"role": "user", "content": prompt}]
-    response = openai.ChatCompletion.create(
+
+    response =  client.chat.completions.create(
         model=model,
         messages=messages,
         temperature=0, 
     )
-    return response.choices[0].message["content"]
+    return response.choices[0].message.content
 
 def main():
     parser = argparse.ArgumentParser(description='AI Command Line Assistant')
@@ -22,7 +28,6 @@ def main():
     dotenv_path = os.path.join(home_dir, ".secrets", "aicmd", ".env")
     load_dotenv(dotenv_path)
 
-    openai.api_key = os.environ.get('OPEN_AI_KEY')
     ai_command = args.command
 
     prompt = f"""
