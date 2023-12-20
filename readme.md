@@ -30,14 +30,14 @@ deactivate
 
 3. **Integrate with Shell**
 
-update ~/.zprofile, the same should work for `~/.bashrc` or  `~/.bash_profile`
+Update `~/.zprofile`, the same should work for `~/.bashrc` or  `~/.bash_profile`
 
 ```bash
 echo 'ai() { ~/ai-tools/venv/bin/python ~/ai-tools/aicmd.py "$@"; }' >> ~/.zprofile  &&
 source ~/.zprofile
 ```
 
-1. Setup Open AI secrets
+4. **Setup Open AI secrets**
 
 Obtain api key from https://platform.openai.com/api-keys
 
