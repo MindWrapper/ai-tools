@@ -10,35 +10,40 @@ Python 3.x
 
 ## Setup
 
-```bash
-git clone git@github.com:MindWrapper/ai-tools.git ~/ai-tools
+1. **Clone the Repository**
 
+Clone the repository into your home folder using the following commands:
+
+```bash
+git clone git@github.com:MindWrapper/ai-tools.git  ~/ai-tools &&
 cd ~/ai-tools
-
-python3 -m venv venv
-
-source venv/bin/activate
-
-pip install -r requirements.txt
-
-chmod +x aicmd.py
 ```
 
-### Integrate with the Shell
+2. **Setup virtual env and install python depdenencies**
 
 ```bash
-
-# update .zprofile, the same should work for .bashrc or  ~/.bash_profile
-echo 'ai() { ~/ai-tools/venv/bin/python ~/ai-tools-tool/aicmd.py "$@"; }' >> ~/.zprofile 
-
-source ~/.zprofile
-
-```bash
+python3 -m venv venv &&
+source venv/bin/activate &&
+pip install -r requirements.txt &&
 deactivate
-mkdir -p ~/.secrets/aicmd && touch ~/.secrets/aicmd/.env
 ```
+
+3. **Integrate with Shell**
+
+update ~/.zprofile, the same should work for `~/.bashrc` or  `~/.bash_profile`
+
+```bash
+echo 'ai() { ~/ai-tools/venv/bin/python ~/ai-tools/aicmd.py "$@"; }' >> ~/.zprofile  &&
+source ~/.zprofile
+```
+
+1. Setup Open AI secrets
 
 Obtain api key from https://platform.openai.com/api-keys
+
+```bash
+mkdir -p ~/.secrets/aicmd && touch ~/.secrets/aicmd/.env
+```
 
 ```bash
 echo "OPEN_AI_KEY=your_key" >>  ~/.secrets/aicmd/.env
@@ -48,7 +53,9 @@ echo "OPEN_AI_KEY=your_key" >>  ~/.secrets/aicmd/.env
 
 Example command:
 
-`ai "count how many times 'AI Command Line Assistant' can be found in the current dir"`
+```bash
+ai "count how many time 'AI Command Line Assistant' can be found in the current dir"
+```
 
 Output:
 
@@ -56,4 +63,5 @@ Output:
 
 
 # License
+
 This project is licensed under the MIT License.
