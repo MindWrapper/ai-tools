@@ -11,10 +11,9 @@ Python 3.x
 ## Setup
 
 ```bash
-# Clone the repository
-git clone https://github.com/your-repository/ai-tool.git
+git clone git@github.com:MindWrapper/ai-tools.git ~/ai-tools
 
-cd ai-tool
+cd ~/ai-tools
 
 python3 -m venv venv
 
@@ -30,7 +29,7 @@ chmod +x aicmd.py
 ```bash
 
 # update .zprofile, the same should work for .bashrc or  ~/.bash_profile
-echo 'ai() { ~/ai-tools/venv/bin/python ~/path_to_ai-tool/aicmd.py "$@"; }' >> ~/.zprofile 
+echo 'ai() { ~/ai-tools/venv/bin/python ~/ai-tools-tool/aicmd.py "$@"; }' >> ~/.zprofile 
 
 source ~/.zprofile
 
@@ -43,14 +42,13 @@ Obtain api key from https://platform.openai.com/api-keys
 
 ```bash
 echo "OPEN_AI_KEY=your_key" >>  ~/.secrets/aicmd/.env
-source ~/.zprofile 
 ```
 
 # Usage
 
 Example command:
 
-`ai "count how many time 'AI Command Line Assistant' can be found in the current dir"`
+`ai "count how many times 'AI Command Line Assistant' can be found in the current dir"`
 
 Output:
 
