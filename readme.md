@@ -65,3 +65,21 @@ Output:
 # License
 
 This project is licensed under the MIT License.
+
+## Troubleshooting
+
+## Troubleshooting
+
+### Common Errors
+Ensure you have an active API account with OpenAI and sufficient credits.
+
+#### 1. RateLimitError (Error Code: 429)
+This error indicates you've exceeded your OpenAI API quota. To resolve this, verify your current API usage and consider options like upgrading your plan or optimizing your API calls. For more information on rate limits and how to manage them, refer to [OpenAI Error Codes](https://platform.openai.com/docs/guides/error-codes/api-errors).
+
+#### 2. NotFoundError (Error Code: 404)
+This error occurs when the `gpt-4` model is either not available or you don't have access to it. Check [Accessing GPT-4](https://help.openai.com/en/articles/7102672-how-can-i-access-gpt-4).
+
+
+
+
+
