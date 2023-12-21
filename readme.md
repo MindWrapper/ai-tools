@@ -68,8 +68,6 @@ This project is licensed under the MIT License.
 
 ## Troubleshooting
 
-## Troubleshooting
-
 ### Common Errors
 Ensure you have an active API account with OpenAI and sufficient credits.
 
