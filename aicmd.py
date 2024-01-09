@@ -36,7 +36,7 @@ Determine the appropriate shell command based on '{ai_command}':
 2. In cases where the user does not specify a search command or the scope of the search, default to the current directory.
 3. For git-related requests, ensure the response strictly pertains to git commands.
 4. When asked to find a pattern in files, default to case-insensitive matching, unless the user requests case sensitivity.
-5. Output should be a single line and signle command. No eplanation or justification is required.
+5. Output must signle command without quotes and  without explanations.
     """
 
     result = get_completion(prompt, model="gpt-4")
