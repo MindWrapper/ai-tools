@@ -31,12 +31,12 @@ def main():
     ai_command = args.command
 
     prompt = f"""
-    print command that '{ai_command}'.
-    If user asks to search or find something, then make sure to include hidden files,  unless user specifies otherwise.
-    If user doesn't specify the scope of search command, then use current directory.
-    If user asks for git command make sure to do include only git command.
-    When user asks to look for a pattern inside files, make sure pattern match is case-insensetive, unless user specifies otherwise.
-    Output should be a single line and signle command, no quotes, no new lines.
+Determine the appropriate shell command based on '{ai_command}':
+1. If the user requests a search or find operation, include hidden files by default, unless explicitly stated otherwise.
+2. In cases where the user does not specify a search command or the scope of the search, default to the current directory.
+3. For git-related requests, ensure the response strictly pertains to git commands.
+4. When asked to find a pattern in files, default to case-insensitive matching, unless the user requests case sensitivity.
+5. Output should be a single line and signle command. No eplanation or justification is required.
     """
 
     result = get_completion(prompt, model="gpt-4")
