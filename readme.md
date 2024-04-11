@@ -4,20 +4,19 @@
 
 ### Use-case 1: Find Appropriate Shell Command
 
-I struggle to remember command lines I don't use often. 
+If you struggle to remember command lines that you don't use often, use the following command:
 
 ```bash
 ai "count how many times 'AI Command Line Assistant' can be found in the current dir"
 ```
+
 Output:
 
 `grep -ri "AI Command Line Assistant" . | wc -l`
 
 ### Use-case 2: Review File
 
-I find ChatGPT [hard to use](https://www.reddit.com/r/ChatGPT/comments/18nj25d/triple_quotes_for_chatgpt/) for reviewing big markdown files. Trought API however all works fine.
-
-
+If you find ChatGPT [hard to use](https://www.reddit.com/r/ChatGPT/comments/18nj25d/triple_quotes_for_chatgpt/) for reviewing big markdown files, you can use the API instead.
 
 ```bash
 review ./readme.md
@@ -36,7 +35,9 @@ code --diff ./readme.md /var/folders/yk/rk3pptpd609d1y8lcfy6n1vm0000gn/T/tmpdl5d
 
 <img width="1624" alt="image" src="https://github.com/MindWrapper/ai-tools/assets/1193002/dcaeba77-7bf3-4513-8f74-d74611b928a1">
 
-**Note that currently, only Markdown files are supported, the tool can be extended to support other file types. 
+Suggested changes are on the left.
+
+**Note: Currently, only Markdown files are supported. The tool can be extended to support other file types. 
 
 ## Prerequisites
 
