@@ -34,10 +34,21 @@ Update `~/.zprofile`, the same should work for `~/.bashrc` or  `~/.bash_profile`
 
 ```bash
 echo 'ai() { ~/ai-tools/venv/bin/python ~/ai-tools/aicmd.py "$@"; }' >> ~/.zprofile  &&
+```
+
+```bash
+echo 'review() { ~/ai-tools/venv/bin/python ~/ai-tools/review.py "$@"; }' >> ~/.zprofile  &&
+```
+
+```bash
+echo 'review() { ~/ai-tools/venv/bin/python ~/ai-tools/review.py "$@"; }' >> ~/.zprofile  &&
+```
+
+```bash
 source ~/.zprofile
 ```
 
-4. **Setup Open AI secrets**
+1. **Setup Open AI secrets**
 
 Obtain api key from https://platform.openai.com/api-keys
 
@@ -60,6 +71,11 @@ ai "count how many time 'AI Command Line Assistant' can be found in the current 
 Output:
 
 `grep -ri "AI Command Line Assistant" . | wc -l`
+
+
+```bash
+review "./readme.md"
+```
 
 
 # License
