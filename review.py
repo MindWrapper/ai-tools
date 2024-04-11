@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 from openai import OpenAI
 import os
 import subprocess
+import tempfile  
 
 def review_md_file(file_path):
     print(f"Reviewing Markdown file: {file_path}")
@@ -32,7 +33,6 @@ Output must be the modified file, with all the improvements. Here is a list of i
     ]
 
     client = OpenAI(
-        # This is the default and can be omitted
         api_key=os.environ.get("OPEN_AI_KEY")
     )
     response = client.chat.completions.create(
@@ -43,9 +43,9 @@ Output must be the modified file, with all the improvements. Here is a list of i
 
     modified_content = response.choices[0].message.content.strip()
 
-    modified_file_path = file_path + ".modified.md"
-    with open(modified_file_path, 'w') as modified_file:
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".modified.md", mode='w') as modified_file:
         modified_file.write(modified_content)
+        modified_file_path = modified_file.name  # Save the path for later use
 
     return modified_file_path
 
