@@ -1,8 +1,19 @@
-# AI-Powered Terminal Helpers
+# LLM-Powered Utilities
 
-## Usage
+A collection of LLM-powered utilities to simplify everyday development tasks.
 
-### Use-case 1: Find Appropriate Shell Command
+- [LLM-Powered Utilities](#llm-powered-utilities)
+- [Usage](#usage)
+  - [Use-case 1: Find Appropriate Shell Command](#use-case-1-find-appropriate-shell-command)
+  - [Use-case 2: Review File](#use-case-2-review-file)
+- [Prerequisites](#prerequisites)
+- [Setup](#setup)
+- [License](#license)
+- [Troubleshooting](#troubleshooting)
+
+# Usage
+
+## Use-case 1: Find Appropriate Shell Command
 
 If you struggle to remember command lines that you don't use often, use the following command:
 
@@ -14,7 +25,7 @@ Output:
 
 `grep -ri "AI Command Line Assistant" . | wc -l`
 
-### Use-case 2: Review File
+## Use-case 2: Review File
 
 If you find ChatGPT [hard to use](https://www.reddit.com/r/ChatGPT/comments/18nj25d/triple_quotes_for_chatgpt/) for reviewing large markdown files, you can use the API instead.
 
@@ -33,13 +44,13 @@ code --diff ./readme.md /var/folders/yk/rk3pptpd609d1y8lcfy6n1vm0000gn/T/tmpdl5d
 
 `code` is an alias for Visual Studio Code. See [Launching from the command line](https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line).
 
-<img width="1195" alt="image" src="https://github.com/MindWrapper/ai-tools/assets/1193002/9b016dc4-f7f9-4627-883d-39f20ddf9a7c">
+![image](https://github.com/MindWrapper/ai-tools/assets/1193002/9b016dc4-f7f9-4627-883d-39f20ddf9a7c)
 
 The suggested changes are on the left.
 
 _Note: Currently, only Markdown files are supported. The tool can be extended to support other file types._
 
-## Prerequisites
+# Prerequisites
 
 Ensure you have the following installed:
 
@@ -47,16 +58,16 @@ Ensure you have the following installed:
 - pip
 - virtualenv
 
-## Setup
+# Setup
 
-### 1. Clone the Repository
+1. Clone the Repository
 
 ```bash
 git clone git@github.com:MindWrapper/ai-tools.git  ~/ai-tools
 cd ~/ai-tools
 ```
 
-### 2. Setup Virtual Environment and Install Dependencies
+2. Setup Virtual Environment and Install Dependencies
 
 ```bash
 python3 -m venv venv
@@ -65,7 +76,7 @@ pip install -r requirements.txt
 deactivate
 ```
 
-### 3. Integrate with Shell
+3. Integrate with Shell
 
 Update `~/.zprofile`. This should also work for `~/.bashrc` or  `~/.bash_profile`.
 
@@ -82,7 +93,7 @@ Then, run:
 source ~/.zprofile
 ```
 
-### 4. Setup OpenAI Secrets
+4. Setup OpenAI Secrets
 
 Get your API key from [OpenAI API Keys](https://platform.openai.com/api-keys).
 
@@ -91,20 +102,18 @@ mkdir -p ~/.secrets/aicmd && touch ~/.secrets/aicmd/.env
 echo "OPEN_AI_KEY=your_key" >>  ~/.secrets/aicmd/.env
 ```
 
-## License
+# License
 
 This project is licensed under the MIT License.
 
-## Troubleshooting
-
-### Common Errors
+# Troubleshooting
 
 Ensure you have an active API account with OpenAI and sufficient credits.
 
-#### 1. RateLimitError (Error Code: 429)
+1. RateLimitError (Error Code: 429)
 
 This error indicates you've exceeded your OpenAI API quota. Check your current API usage and consider upgrading your plan or optimizing your API calls. For more information, refer to [OpenAI Error Codes](https://platform.openai.com/docs/guides/error-codes/api-errors).
 
-#### 2. NotFoundError (Error Code: 404)
+2. NotFoundError (Error Code: 404)
 
 This error occurs when the `gpt-4` model is not available or you don't have access to it. Check [Accessing GPT-4](https://help.openai.com/en/articles/7102672-how-can-i-access-gpt-4).
