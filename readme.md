@@ -33,9 +33,10 @@ code --diff ./readme.md /var/folders/yk/rk3pptpd609d1y8lcfy6n1vm0000gn/T/tmpdl5d
 
 `code` is an alias for Visual Studio Code. See [Launching from the command line](https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line).
 
-<img width="1624" alt="image" src="https://github.com/MindWrapper/ai-tools/assets/1193002/dcaeba77-7bf3-4513-8f74-d74611b928a1">
+<img width="1195" alt="image" src="https://github.com/MindWrapper/ai-tools/assets/1193002/9b016dc4-f7f9-4627-883d-39f20ddf9a7c">
 
-Suggested changes are on the left.
+
+The suggested changes are on the left.
 
 **Note: Currently, only Markdown files are supported. The tool can be extended to support other file types. 
 
