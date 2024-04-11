@@ -38,7 +38,7 @@ code --diff ./readme.md /var/folders/yk/rk3pptpd609d1y8lcfy6n1vm0000gn/T/tmpdl5d
 
 The suggested changes are on the left.
 
-**Note: Currently, only Markdown files are supported. The tool can be extended to support other file types. 
+_Note: Currently, only Markdown files are supported. The tool can be extended to support other file types._
 
 ## Prerequisites
 
