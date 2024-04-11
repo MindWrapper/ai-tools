@@ -2,6 +2,7 @@ import sys
 from dotenv import load_dotenv
 from openai import OpenAI
 import os
+import subprocess
 
 def review_md_file(file_path):
     print(f"Reviewing Markdown file: {file_path}")
@@ -40,28 +41,30 @@ Output must be the modified file, with all the improvements. Here is a list of i
         temperature=0,
     )
 
-    # Extract the modified content from the response
     modified_content = response.choices[0].message.content.strip()
 
-    # Save the modified content to a file
     modified_file_path = file_path + ".modified.md"
     with open(modified_file_path, 'w') as modified_file:
         modified_file.write(modified_content)
 
     return modified_file_path
 
+def is_vscode_installed():
+    try:
+        subprocess.run(["code", "--version"], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        return True
+    except subprocess.CalledProcessError:
+        return False
+
 if __name__ == "__main__":
     if len(sys.argv) != 2:
         print("Usage: python script.py <path-to-file>")
         sys.exit(1)
 
-    # Get the file path from the command line argument
     file_path = sys.argv[1]
 
-    # Determine the file extension
     _, file_extension = os.path.splitext(file_path)
 
-    # Load the .env file
     home_dir = os.path.expanduser("~")
     dotenv_path = os.path.join(home_dir, ".secrets", "aicmd", ".env")
     load_dotenv(dotenv_path)
@@ -69,7 +72,12 @@ if __name__ == "__main__":
     if file_extension == '.md':
         modified_file_path = review_md_file(file_path)
         print(f"Modified Markdown file created at: {modified_file_path}")
-        print(f"code --diff {modified_file_path} {file_path}")
+        if is_vscode_installed():
+            print(f"To compare using Visual Studio Code, use the following command:")
+            print(f"code --diff {file_path} {modified_file_path}")
+        else:
+            print("Visual Studio Code is not detected. Please download and install it from https://code.visualstudio.com/,")
+            print("or use any other diff tool you have available to compare the files.")
     else:
         print(f"Unsupported file type: {file_extension}")
         sys.exit(1)
