@@ -27,7 +27,7 @@ Output:
 
 ## Use-case 2: Review File
 
-If you find ChatGPT [hard to use](https://www.reddit.com/r/ChatGPT/comments/18nj25d/triple_quotes_for_chatgpt/) for reviewing large markdown files, you can use the API instead.
+ChatGPT might be [hard to use](https://www.reddit.com/r/ChatGPT/comments/18nj25d/triple_quotes_for_chatgpt/) for reviewing large markdown files.  `review` leverages Open-AI API and works much better. 
 
 ```bash
 review ./readme.md
