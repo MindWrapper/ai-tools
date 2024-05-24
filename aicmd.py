@@ -39,7 +39,7 @@ Determine the appropriate shell command based on '{ai_command}':
 5. Output must signle command without quotes and  without explanations.
     """
 
-    result = get_completion(prompt, model="gpt-4")
+    result = get_completion(prompt, model="gpt-4o")
    
     if result is not None:
         print(result)
