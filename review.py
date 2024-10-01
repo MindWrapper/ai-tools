@@ -3,7 +3,8 @@ from dotenv import load_dotenv
 from openai import OpenAI
 import os
 import subprocess
-import tempfile  
+import tempfile
+import platform  # New import for platform detection
 
 def review_md_file(file_path):
     print(f"Reviewing Markdown file: {file_path}")
@@ -36,7 +37,7 @@ Output must be the modified file, with all the improvements. Here is a list of i
         api_key=os.environ.get("OPEN_AI_KEY")
     )
     response = client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4o",
         messages=messages,
         temperature=0,
     )
@@ -51,8 +52,13 @@ Output must be the modified file, with all the improvements. Here is a list of i
 
 def is_vscode_installed():
     try:
-        subprocess.run(["code", "--version"], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        return True
+        if platform.system() == "Windows":
+            # On Windows, use the "where" command to check for Visual Studio Code
+            result = subprocess.run(["where", "code"], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+        else:
+            # On macOS/Linux, use the "which" command to check for Visual Studio Code
+            result = subprocess.run(["which", "code"], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        return result.returncode == 0
     except subprocess.CalledProcessError:
         return False
 
@@ -74,7 +80,7 @@ if __name__ == "__main__":
         print(f"Modified Markdown file created at: {modified_file_path}")
         if is_vscode_installed():
             print(f"To compare using Visual Studio Code, use the following command:")
-            print(f"code --diff {modified_file_path} {file_path}")
+            print(f"code --diff {file_path} {modified_file_path}")
         else:
             print("Visual Studio Code is not detected. Please download and install it from https://code.visualstudio.com/,")
             print("or use any other diff tool you have available to compare the files.")

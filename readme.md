@@ -8,6 +8,8 @@ A collection of LLM-powered utilities to simplify everyday development tasks.
   - [Use-case 2: Review File](#use-case-2-review-file)
 - [Prerequisites](#prerequisites)
 - [Setup](#setup)
+  - [MacOS/Linux](#macoslinux)
+  - [Windows](#windows)
 - [License](#license)
 - [Troubleshooting](#troubleshooting)
 
@@ -27,7 +29,7 @@ Output:
 
 ## Use-case 2: Review File
 
-ChatGPT might be [hard to use](https://www.reddit.com/r/ChatGPT/comments/18nj25d/triple_quotes_for_chatgpt/) for reviewing large markdown files.  `review` leverages Open-AI API and works much better. 
+ChatGPT might be [hard to use](https://www.reddit.com/r/ChatGPT/comments/18nj25d/triple_quotes_for_chatgpt/) for reviewing large markdown files. `review` leverages OpenAI API and works much better.
 
 ```bash
 review ./readme.md
@@ -60,10 +62,12 @@ Ensure you have the following installed:
 
 # Setup
 
+## MacOS/Linux
+
 1. Clone the Repository
 
 ```bash
-git clone git@github.com:MindWrapper/ai-tools.git  ~/ai-tools
+git clone git@github.com:MindWrapper/ai-tools.git ~/ai-tools
 cd ~/ai-tools
 ```
 
@@ -78,7 +82,7 @@ deactivate
 
 3. Integrate with Shell
 
-Update `~/.zprofile`. This should also work for `~/.bashrc` or  `~/.bash_profile`.
+Update `~/.zprofile`. This should also work for `~/.bashrc` or `~/.bash_profile`.
 
 Add the following lines if they are missing:
 
@@ -99,7 +103,50 @@ Get your API key from [OpenAI API Keys](https://platform.openai.com/api-keys).
 
 ```bash
 mkdir -p ~/.secrets/aicmd && touch ~/.secrets/aicmd/.env
-echo "OPEN_AI_KEY=your_key" >>  ~/.secrets/aicmd/.env
+echo "OPEN_AI_KEY=your_key" >> ~/.secrets/aicmd/.env
+```
+
+## Windows
+
+1. Clone the Repository
+
+```powershell
+git clone git@github.com:MindWrapper/ai-tools.git %USERPROFILE%\ai-tools
+cd %USERPROFILE%\ai-tools
+```
+
+2. Setup Virtual Environment and Install Dependencies
+
+```powershell
+python -m venv venv
+.\venv\Scripts\activate
+pip install -r requirements.txt
+deactivate
+```
+
+3. Integrate with Command Line
+
+Create the following batch files and make sure to add their directory into `%PATH%`.
+
+`ai.bat`
+
+```batch
+@echo off
+"%USERPROFILE%\ai-tools\venv\Scripts\python.exe" "%USERPROFILE%\ai-tools\aicmd.py" %*
+```
+
+`review.bat`
+
+```batch
+@echo off
+"%USERPROFILE%\ai-tools\venv\Scripts\python.exe" "%USERPROFILE%\ai-tools\review.py" %*
+```
+
+4. Setup OpenAI Secrets
+
+```batch
+mkdir "%USERPROFILE%\.secrets\aicmd"
+echo OPEN_AI_KEY=your_key > "%USERPROFILE%\.secrets\aicmd\.env"
 ```
 
 # License
@@ -110,10 +157,10 @@ This project is licensed under the MIT License.
 
 Ensure you have an active API account with OpenAI and sufficient credits.
 
-1. RateLimitError (Error Code: 429)
+1. **RateLimitError (Error Code: 429)**
 
-This error indicates you've exceeded your OpenAI API quota. Check your current API usage and consider upgrading your plan or optimizing your API calls. For more information, refer to [OpenAI Error Codes](https://platform.openai.com/docs/guides/error-codes/api-errors).
+   This error indicates you've exceeded your OpenAI API quota. Check your current API usage and consider upgrading your plan or optimizing your API calls. For more information, refer to [OpenAI Error Codes](https://platform.openai.com/docs/guides/error-codes/api-errors).
 
-2. NotFoundError (Error Code: 404)
+2. **NotFoundError (Error Code: 404)**
 
-This error occurs when the `gpt-4` model is not available or you don't have access to it. Check [Accessing GPT-4](https://help.openai.com/en/articles/7102672-how-can-i-access-gpt-4).
+   This error occurs when the `gpt-4o` model is not available or you don't have access to it. Check [Accessing GPT-4](https://help.openai.com/en/articles/7102672-how-can-i-access-gpt-4).

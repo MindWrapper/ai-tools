@@ -2,6 +2,7 @@ import argparse
 from dotenv import load_dotenv
 from openai import OpenAI
 import os
+import platform
 
 def get_completion(prompt, model):
 
@@ -12,7 +13,7 @@ def get_completion(prompt, model):
 
     messages = [{"role": "user", "content": prompt}]
 
-    response =  client.chat.completions.create(
+    response = client.chat.completions.create(
         model=model,
         messages=messages,
         temperature=0, 
@@ -30,13 +31,24 @@ def main():
 
     ai_command = args.command
 
+    # Detect the operating system
+    operating_system = platform.system().lower()
+
+    if 'windows' in operating_system:
+        os_specific_info = "Use Windows-specific commands (e.g., `dir`, `findstr`, `git`) if applicable."
+    elif 'darwin' in operating_system:  # MacOS is identified as 'darwin'
+        os_specific_info = "Use Mac-specific commands (e.g., `ls`, `grep`, `git`) if applicable."
+    else:
+        os_specific_info = "Use Linux/Unix commands by default."
+
     prompt = f"""
 Determine the appropriate shell command based on '{ai_command}':
-1. If the user requests a search or find operation, include hidden files by default, unless explicitly stated otherwise.
-2. In cases where the user does not specify a search command or the scope of the search, default to the current directory.
-3. For git-related requests, ensure the response strictly pertains to git commands.
-4. When asked to find a pattern in files, default to case-insensitive matching, unless the user requests case sensitivity.
-5. Output must signle command without quotes and  without explanations.
+1. {os_specific_info}
+2. If the user requests a search or find operation, include hidden files by default, unless explicitly stated otherwise.
+3. In cases where the user does not specify a search command or the scope of the search, default to the current directory.
+4. For git-related requests, ensure the response strictly pertains to git commands.
+5. When asked to find a pattern in files, default to case-insensitive matching, unless the user requests case sensitivity.
+6. Output must be a single command without quotes and without explanations.
     """
 
     result = get_completion(prompt, model="gpt-4o")
@@ -44,7 +56,7 @@ Determine the appropriate shell command based on '{ai_command}':
     if result is not None:
         print(result)
     else:
-        print("Can not generate command. Try another promt.")
+        print("Cannot generate command. Try another prompt.")
 
 if __name__ == "__main__":
     main()
